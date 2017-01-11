@@ -11,8 +11,12 @@ class Poker
   private
 
   def rank hand
-    ranks = hand.map { |card| card[/[\d+JQKA]/] }
+    ranks = hand.map { |card| card_rank card }
     ranks.map { |card| RANKS.index card }.max
+  end
+
+  def card_rank card
+    card[/\d+|[JQKA]/]
   end
 
   RANKS = %w{2 3 4 5 6 7 8 9 10 J Q K A} 
