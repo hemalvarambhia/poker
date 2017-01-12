@@ -21,7 +21,10 @@ class Poker
     def rank
       ranks = cards.map { |card| card_rank card }
 
-      return [1] if a_pair?
+      if a_pair?
+        pair = ranks.group_by { |rank| rank }.select { |rank, cards| cards.size == 2 }.keys.first
+        return [1, RANKS.index(pair)]
+      end
         
       [0, ranks.map { |card| RANKS.index card }.max]
     end

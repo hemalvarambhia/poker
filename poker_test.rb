@@ -32,7 +32,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_two_pair
-    skip
     pair_of_2 = %w(4S 2H 6S 2D JH)
     pair_of_4 = %w(2S 4H 6C 4D JD)
     game = Poker.new([pair_of_2, pair_of_4])
