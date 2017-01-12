@@ -25,7 +25,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_nothing_vs_one_pair
-    skip
     high_of_king = %w(4S 5H 6C 8D KH)
     pair_of_4 = %w(2S 4H 6S 4D JH)
     game = Poker.new([high_of_king, pair_of_4])
