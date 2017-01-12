@@ -6,21 +6,19 @@ class Poker
   end
 
   def best_hand
-    [ hands.max_by { |hand| hand.rank }.cards ]
+    [ hands.max_by { |hand| hand.rank }.to_a ]
   end
   
   private
 
   class Hand
-    attr_reader :the_cards
+    attr_reader :cards
 
     def initialize cards
-      @the_cards = cards.map { |card| Card.new card }
+      @cards = cards.map { |card| Card.new card }
     end
 
     def rank
-      ranks = the_cards.map { |card| card.rank }
-
       if a_pair?
         pair = ranks.group_by { |rank| rank }.select { |rank, cards| cards.size == 2 }.keys.first
         return [1, ranking(pair)]
@@ -29,23 +27,25 @@ class Poker
       [0, ranks.map { |card| ranking card }.max]
     end
 
-    def cards
-      the_cards.map { |card| card.to_s }
+    def to_a
+      cards.map { |card| card.to_s }
     end
 
     private
 
-    def a_pair?
-      ranks = the_cards.map { |card| card.rank }
+    def ranks
+      cards.map { |card| card.rank }
+    end
 
+    def a_pair?
       ranks.group_by { |rank| rank }.one? { |rank, cards| cards.size == 2 }
     end
 
     def ranking card
-      RANKS.index card   
+      Card::RANKS.index card   
     end
 
-    RANKS = %w{2 3 4 5 6 7 8 9 10 J Q K A} 
+#    RANKS = %w{2 3 4 5 6 7 8 9 10 J Q K A} 
 
     class Card
       attr_reader :rank, :suit
