@@ -19,7 +19,7 @@ class Poker
     end
 
     def rank
-      ranks = the_cards.map { |card| card_rank card }
+      ranks = the_cards.map { |card| card.rank }
 
       if a_pair?
         pair = ranks.group_by { |rank| rank }.select { |rank, cards| cards.size == 2 }.keys.first
@@ -36,13 +36,9 @@ class Poker
     private
 
     def a_pair?
-      ranks = the_cards.map { |card| card_rank card }
+      ranks = the_cards.map { |card| card.rank }
 
       ranks.group_by { |rank| rank }.one? { |rank, cards| cards.size == 2 }
-    end
-
-    def card_rank card
-      card.rank
     end
 
     def ranking card
