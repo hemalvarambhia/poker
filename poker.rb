@@ -12,14 +12,14 @@ class Poker
   private
 
   class Hand
-    attr_reader :cards
+    attr_reader :the_cards
 
     def initialize cards
-      @cards = cards
+      @the_cards = cards.map { |card| Card.new card }
     end
 
     def rank
-      ranks = cards.map { |card| card_rank card }
+      ranks = the_cards.map { |card| card_rank card }
 
       if a_pair?
         pair = ranks.group_by { |rank| rank }.select { |rank, cards| cards.size == 2 }.keys.first
@@ -29,23 +29,48 @@ class Poker
       [0, ranks.map { |card| ranking card }.max]
     end
 
+    def cards
+      the_cards.map { |card| card.to_s }
+    end
+
     private
 
     def a_pair?
-      ranks = cards.map { |card| card_rank card }
+      ranks = the_cards.map { |card| card_rank card }
 
       ranks.group_by { |rank| rank }.one? { |rank, cards| cards.size == 2 }
     end
 
     def card_rank card
-      card[/\d+|[JQKA]/]
+      card.rank
     end
 
     def ranking card
-      RANKS.index card      
+      RANKS.index card   
     end
 
     RANKS = %w{2 3 4 5 6 7 8 9 10 J Q K A} 
+
+    class Card
+      attr_reader :rank, :suit
+ 
+      def initialize card
+        @rank = card[/\d+|[JQKA]/]
+        @suit = card[/[CDHS]/]
+      end
+
+      def ranking card
+        RANKS.index card      
+      end
+   
+      def to_s
+        "#{rank}#{suit}"
+      end
+     
+      private
+
+      RANKS = %w{2 3 4 5 6 7 8 9 10 J Q K A} 
+    end
   end
 end
 
