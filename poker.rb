@@ -23,10 +23,10 @@ class Poker
 
       if a_pair?
         pair = ranks.group_by { |rank| rank }.select { |rank, cards| cards.size == 2 }.keys.first
-        return [1, RANKS.index(pair)]
+        return [1, ranking(pair)]
       end
         
-      [0, ranks.map { |card| RANKS.index card }.max]
+      [0, ranks.map { |card| ranking card }.max]
     end
 
     private
@@ -39,6 +39,10 @@ class Poker
 
     def card_rank card
       card[/\d+|[JQKA]/]
+    end
+
+    def ranking card
+      RANKS.index card      
     end
 
     RANKS = %w{2 3 4 5 6 7 8 9 10 J Q K A} 
