@@ -19,6 +19,10 @@ class Poker
     end
 
     def rank
+      if two_pair?
+        return [2]
+      end
+      
       if a_pair?
         pair = ranks.group_by { |rank| rank }.select { |rank, cards| cards.size == 2 }.keys.first
         return [1, ranking(pair)]
@@ -35,6 +39,13 @@ class Poker
 
     def ranks
       cards.map { |card| card.rank }
+    end
+
+    def two_pair?
+      ranks.
+        group_by { |rank| rank }.
+        select { |rank, cards| cards.size == 2 }.
+        size == 2
     end
 
     def a_pair?
