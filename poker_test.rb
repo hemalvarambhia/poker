@@ -53,7 +53,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_another_two_double_pair
-    skip
     aces_and_twos = %w(2S AH 2C AD JH)
     queens_and_jacks = %w(JD QH JS 8D QC)
     game = Poker.new([queens_and_jacks, aces_and_twos])

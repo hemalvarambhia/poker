@@ -20,11 +20,13 @@ class Poker
 
     def rank
       if two_pair?
-        return [2]
+        ordered_pair_ranks =
+          [ ranking(pairs.first), ranking(pairs.last) ].sort.reverse
+        return [2] + ordered_pair_ranks
       end
       
       if a_pair?
-        pair = ranks.group_by { |rank| rank }.select { |rank, cards| cards.size == 2 }.keys.first
+        pair = pairs.first
         return [1, ranking(pair)]
       end
         
@@ -42,14 +44,17 @@ class Poker
     end
 
     def two_pair?
-      ranks.
-        group_by { |rank| rank }.
-        select { |rank, cards| cards.size == 2 }.
-        size == 2
+      pairs.size == 2
     end
 
     def a_pair?
-      ranks.group_by { |rank| rank }.one? { |rank, cards| cards.size == 2 }
+      pairs.one?
+    end
+
+    def pairs
+      ranks.
+        group_by { |rank| rank }.
+        select { |rank, cards| cards.size == 2 }.keys
     end
 
     def ranking card
