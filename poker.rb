@@ -20,7 +20,10 @@ class Poker
 
     def rank
       if three_of_a_kind?
-        return [3]
+        three_of_kind =
+          ranks.group_by { |rank| rank }.
+          select { |rank, cards| cards.size == 3 }.keys.first
+        return [3, ranking(three_of_kind) ]
       end
       
       if two_pair?

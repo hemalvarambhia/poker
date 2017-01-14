@@ -67,7 +67,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_two_three
-    skip
     three_twos = %w(2S 2H 2C 8D JH)
     three_aces = %w(4S AH AS 8C AD)
     game = Poker.new([three_twos, three_aces])
