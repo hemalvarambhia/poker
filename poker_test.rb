@@ -56,7 +56,7 @@ class PokerTest < Minitest::Test
     skip
     aces_and_twos = %w(2S AH 2C AD JH)
     queens_and_jacks = %w(JD QH JS 8D QC)
-    game = Poker.new([aces_and_twos, queens_and_jacks])
+    game = Poker.new([queens_and_jacks, aces_and_twos])
     assert_equal [aces_and_twos], game.best_hand
   end
 
