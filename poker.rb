@@ -19,6 +19,10 @@ class Poker
     end
 
     def rank
+      if three_of_a_kind?
+        return [3]
+      end
+      
       if two_pair?
         ordered_pair_ranks =
           [ ranking(pairs.first), ranking(pairs.last) ].sort.reverse
@@ -41,6 +45,10 @@ class Poker
 
     def ranks
       cards.map { |card| card.rank }
+    end
+
+    def three_of_a_kind?
+      ranks.group_by { |rank| rank }.one? { |rank, cards| cards.size == 3 }
     end
 
     def two_pair?
