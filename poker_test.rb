@@ -74,7 +74,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_three_vs_straight
-    skip
     three_of_4 = %w(4S 5H 4C 8D 4H)
     straight = %w(3S 4D 2S 6D 5C)
     game = Poker.new([three_of_4, straight])

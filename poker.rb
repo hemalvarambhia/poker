@@ -19,6 +19,8 @@ class Poker
     end
 
     def rank
+      return [4] if straight?
+      
       if three_of_a_kind?
         three_of_kind =
           ranks.group_by { |rank| rank }.
@@ -48,6 +50,10 @@ class Poker
 
     def ranks
       cards.map { |card| card.rank }
+    end
+
+    def straight?
+      %w{2 3 4 5 6} == ranks.sort_by { |rank| ranking rank }
     end
 
     def three_of_a_kind?
