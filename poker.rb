@@ -53,7 +53,9 @@ class Poker
     end
 
     def straight?
-      %w{2 3 4 5 6} == ranks.sort_by { |rank| ranking rank }
+      possible_straights = [%w{2 3 4 5 6}, %w{2 3 4 5 A} ]
+      possible_straights.
+        include? ranks.sort_by { |rank| ranking rank }
     end
 
     def three_of_a_kind?
