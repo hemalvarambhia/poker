@@ -19,7 +19,10 @@ class Poker
     end
 
     def rank
-      return [4] if straight?
+      if straight?
+        rank_of_straight = STRAIGHTS.index ranks
+        return [4, rank_of_straight]
+      end
       
       if three_of_a_kind?
         three_of_kind =
@@ -48,14 +51,18 @@ class Poker
 
     private
 
+    STRAIGHTS = [
+      %w{2 3 4 5 6},
+      %w{2 3 4 5 A},
+      %w{7 8 9 10 J},
+    ]
+
     def ranks
-      cards.map { |card| card.rank }
+      cards.map { |card| card.rank }.sort_by { |rank| ranking rank }
     end
 
     def straight?
-      possible_straights = [%w{2 3 4 5 6}, %w{2 3 4 5 A} ]
-      possible_straights.
-        include? ranks.sort_by { |rank| ranking rank }
+      STRAIGHTS.include? ranks
     end
 
     def three_of_a_kind?
