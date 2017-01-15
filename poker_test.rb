@@ -112,7 +112,7 @@ class PokerTest < Minitest::Test
     skip
     flush_to_8 = %w(3H 6H 7H 8H 5H)
     flush_to_7 = %w(2S 4S 5S 6S 7S)
-    game = Poker.new([flush_to_8, flush_to_7])
+    game = Poker.new([flush_to_7, flush_to_8])
     assert_equal [flush_to_8], game.best_hand
   end
 
