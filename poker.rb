@@ -19,6 +19,10 @@ class Poker
     end
 
     def rank
+      if flush?
+        return [5]
+      end
+      
       if straight?
         rank_of_straight = STRAIGHTS.index ranks
         return [4, rank_of_straight]
@@ -59,6 +63,10 @@ class Poker
 
     def ranks
       cards.map { |card| card.rank }.sort_by { |rank| ranking rank }
+    end
+
+    def flush?
+      cards.uniq { |card| card.suit }.one?
     end
 
     def straight?
