@@ -25,8 +25,8 @@ class Poker
 
       if full_house?
         triplets = 
-          ranks.group_by { |rank| rank }
-            .select { |rank, cards| cards.size == 3 }.keys.first
+          grouped_by_rank.
+            select { |rank, cards| cards.size == 3 }.keys.first
         return [6, ranking(triplets) ]
       end
 
@@ -40,8 +40,7 @@ class Poker
       end
       
       if three_of_a_kind?
-        three_of_kind =
-          ranks.group_by { |rank| rank }.
+        three_of_kind = grouped_by_rank.
           select { |rank, cards| cards.size == 3 }.keys.first
         return [3, ranking(three_of_kind) ]
       end
@@ -77,7 +76,7 @@ class Poker
     end
  
     def square?
-      ranks.group_by { |rank| rank }.one? { |rank, cards| cards.size == 4 }
+      grouped_by_rank.one? { |rank, cards| cards.size == 4 }
     end
 
     def full_house?
@@ -93,7 +92,7 @@ class Poker
     end
 
     def three_of_a_kind?
-      ranks.group_by { |rank| rank }.one? { |rank, cards| cards.size == 3 }
+      grouped_by_rank.one? { |rank, cards| cards.size == 3 }
     end
 
     def two_pair?
@@ -105,9 +104,11 @@ class Poker
     end
 
     def pairs
-      ranks.
-        group_by { |rank| rank }.
-        select { |rank, cards| cards.size == 2 }.keys
+      grouped_by_rank.select { |rank, cards| cards.size == 2 }.keys
+    end
+
+    def grouped_by_rank
+      ranks.group_by { |rank| rank }
     end
 
     def ranking card
