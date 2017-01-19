@@ -20,7 +20,10 @@ class Poker
 
     def rank
       if full_house?
-        return [6]
+        triplets = 
+          ranks.group_by { |rank| rank }
+            .select { |rank, cards| cards.size == 3 }.keys.first
+        return [6, ranking(triplets) ]
       end
 
       if flush?

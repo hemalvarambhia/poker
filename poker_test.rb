@@ -124,7 +124,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_two_fulls
-    skip
     full_of_4_by_9 = %w(4H 4S 4D 9S 9D)
     full_of_5_by_8 = %w(5H 5S 5D 8S 8D)
     game = Poker.new([full_of_4_by_9, full_of_5_by_8])
