@@ -138,7 +138,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_two_square
-    skip
     square_of_2 = %w(2S 2H 2C 8D 2D)
     square_of_5 = %w(4S 5H 5S 5D 5C)
     game = Poker.new([square_of_2, square_of_5])

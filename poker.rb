@@ -20,7 +20,10 @@ class Poker
 
     def rank
       if square?
-        return [7]
+        quads = 
+          grouped_by_rank.
+            select { |rank, cards| cards.size == 4 }.keys.first
+        return [7, ranking(quads) ]
       end
 
       if full_house?
