@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 gem 'minitest', '>= 5.0.0'
 require 'minitest/autorun'
+require 'minitest/pride'
 require_relative 'poker'
 
 class PokerTest < Minitest::Test
@@ -109,7 +110,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_two_flushes
-    skip
     flush_to_8 = %w(3H 6H 7H 8H 5H)
     flush_to_7 = %w(2S 4S 5S 6S 7S)
     game = Poker.new([flush_to_7, flush_to_8])

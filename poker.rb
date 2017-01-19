@@ -20,7 +20,7 @@ class Poker
 
     def rank
       if flush?
-        return [5]
+        return [5, ranks.map { |card| ranking card }.max]
       end
       
       if straight?
