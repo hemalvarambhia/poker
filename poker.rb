@@ -19,6 +19,10 @@ class Poker
     end
 
     def rank
+      if full_house?
+        return [6]
+      end
+
       if flush?
         return [5, ranks.map { |card| ranking card }.max]
       end
@@ -63,6 +67,10 @@ class Poker
 
     def ranks
       cards.map { |card| card.rank }.sort_by { |rank| ranking rank }
+    end
+
+    def full_house?
+      three_of_a_kind? && a_pair?
     end
 
     def flush?

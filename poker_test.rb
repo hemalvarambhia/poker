@@ -117,7 +117,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_flush_vs_full
-    skip
     flush_to_8 = %w(3H 6H 7H 8H 5H)
     full = %w(4S 5H 4C 5D 4H)
     game = Poker.new([flush_to_8, full])
