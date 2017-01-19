@@ -19,6 +19,10 @@ class Poker
     end
 
     def rank
+      if square?
+        return [7]
+      end
+
       if full_house?
         triplets = 
           ranks.group_by { |rank| rank }
@@ -70,6 +74,10 @@ class Poker
 
     def ranks
       cards.map { |card| card.rank }.sort_by { |rank| ranking rank }
+    end
+ 
+    def square?
+      ranks.group_by { |rank| rank }.one? { |rank, cards| cards.size == 4 }
     end
 
     def full_house?

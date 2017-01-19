@@ -131,7 +131,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_full_vs_square
-    skip
     full = %w(4S 5H 4D 5D 4H)
     square_of_3 = %w(3S 3H 2S 3D 3C)
     game = Poker.new([square_of_3, full])
