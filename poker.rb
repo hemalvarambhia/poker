@@ -20,7 +20,7 @@ class Poker
 
     def rank
       if straight_flush?
-        return [8]
+        return [8, ranking(ranks.first)]
       end
 
       if square?
@@ -75,6 +75,9 @@ class Poker
     STRAIGHTS = [
       %w{2 3 4 5 6},
       %w{2 3 4 5 A},
+      %w{4 5 6 7 8},
+      %w{5 6 7 8 9},
+      %w{6 7 8 9 10},
       %w{7 8 9 10 J},
     ]
 
@@ -83,8 +86,7 @@ class Poker
     end
  
     def straight_flush?
-      cards.uniq { |card| card.suit }.one? &&
-        ranks == %w{6 7 8 9 10}
+      straight? && flush?
     end
 
     def square?

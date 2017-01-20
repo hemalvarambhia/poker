@@ -152,7 +152,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_two_straight_flushes
-    skip
     straight_flush_to_8 = %w(4H 6H 7H 8H 5H)
     straight_flush_to_9 = %w(5S 7S 8S 9S 6S)
     game = Poker.new([straight_flush_to_8, straight_flush_to_9])
