@@ -63,7 +63,7 @@ class Poker
         return [1, ranking(pair)]
       end
         
-      [0, ranks.map { |card| ranking card }.max]
+      [0] + ranks.map { |card| ranking card }.reverse
     end
 
     def to_a
