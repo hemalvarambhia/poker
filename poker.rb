@@ -19,6 +19,10 @@ class Poker
     end
 
     def rank
+      if straight_flush?
+        return [8]
+      end
+
       if square?
         quads = 
           grouped_by_rank.
@@ -78,6 +82,11 @@ class Poker
       cards.map { |card| card.rank }.sort_by { |rank| ranking rank }
     end
  
+    def straight_flush?
+      cards.uniq { |card| card.suit }.one? &&
+        ranks == %w{6 7 8 9 10}
+    end
+
     def square?
       grouped_by_rank.one? { |rank, cards| cards.size == 4 }
     end

@@ -145,7 +145,6 @@ class PokerTest < Minitest::Test
   end
 
   def test_square_vs_straight_flush
-    skip
     square_of_5 = %w(4S 5H 5S 5D 5C)
     straight_flush_to_10 = %w(7S 8S 9S 6S 10S)
     game = Poker.new([square_of_5, straight_flush_to_10])
