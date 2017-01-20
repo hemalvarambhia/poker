@@ -162,7 +162,7 @@ class PokerTest < Minitest::Test
     skip
     high_of_8_low_of_3 = %w(3S 5H 6S 8D 7H)
     high_of_8_low_of_2 = %w(2S 5D 6D 8C 7S)
-    game = Poker.new([high_of_8_low_of_3, high_of_8_low_of_2])
+    game = Poker.new([high_of_8_low_of_2, high_of_8_low_of_3])
     assert_equal [high_of_8_low_of_3], game.best_hand
   end
 
