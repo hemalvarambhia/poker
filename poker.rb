@@ -6,7 +6,9 @@ class Poker
   end
 
   def best_hand
-    [ hands.max_by { |hand| hand.rank }.to_a ]
+    return [ hands.max_by { |hand| hand.rank }.to_a ] if hands.size == 2
+
+    hands.max_by(2) { |hand| hand.rank }.map { |best| best.to_a }
   end
   
   private
