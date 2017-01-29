@@ -26,16 +26,12 @@ class Poker
       end
 
       if square?
-        quads = 
-          grouped_by_rank.
-            select { |rank, cards| cards.size == 4 }.keys.first
+        quads = kind 4
         return [7, ranking(quads) ]
       end
 
       if full_house?
-        triplets = 
-          grouped_by_rank.
-            select { |rank, cards| cards.size == 3 }.keys.first
+        triplets = kind 3
         return [6, ranking(triplets) ]
       end
 
@@ -49,8 +45,7 @@ class Poker
       end
       
       if three_of_a_kind?
-        three_of_kind = grouped_by_rank.
-          select { |rank, cards| cards.size == 3 }.keys.first
+        three_of_kind = kind 3
         return [3, ranking(three_of_kind) ]
       end
       
@@ -87,6 +82,11 @@ class Poker
       cards.
         sort_by { |card| card.ranking_position }.
         map { |card| card.rank }
+    end
+
+    def kind number_of
+      grouped_by_rank.
+        select { |rank, cards| cards.size == number_of }.keys.first
     end
  
     def straight_flush?
