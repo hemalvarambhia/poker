@@ -84,7 +84,9 @@ class Poker
     ]
 
     def ranks
-      cards.map { |card| card.rank }.sort_by { |rank| ranking rank }
+      cards.
+        sort_by { |card| card.ranking_position }.
+        map { |card| card.rank }
     end
  
     def straight_flush?
@@ -124,11 +126,11 @@ class Poker
     end
 
     def grouped_by_rank
-      ranks.group_by { |rank| rank }
+      cards.group_by { |card| card.rank }
     end
 
     def ranking card
-      Card::RANKS.index card   
+      Card::RANKS.index card
     end
 
     class Card
@@ -139,8 +141,8 @@ class Poker
         @suit = card[/[CDHS]/]
       end
 
-      def ranking card
-        RANKS.index card      
+      def ranking_position
+        RANKS.index rank      
       end
    
       def to_s
