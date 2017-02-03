@@ -26,13 +26,11 @@ class Poker
       end
 
       if square?
-        quads = kind 4
-        return [7, ranking(quads) ]
+        return [7, ranking(kind 4) ]
       end
 
       if full_house?
-        triplets = kind 3
-        return [6, ranking(triplets) ]
+        return [6, ranking(kind 3) ]
       end
 
       if flush?
@@ -45,8 +43,7 @@ class Poker
       end
       
       if three_of_a_kind?
-        three_of_kind = kind 3
-        return [3, ranking(three_of_kind) ]
+        return [3, ranking(kind 3) ]
       end
       
       if two_pair?
@@ -56,8 +53,7 @@ class Poker
       end
       
       if a_pair?
-        pair = pairs.first
-        return [1, ranking(pair)]
+        return [1, ranking(pairs.first)]
       end
         
       [0] + ranks.map { |card| ranking card }.reverse
