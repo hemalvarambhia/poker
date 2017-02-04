@@ -38,7 +38,7 @@ class Poker
       
       if two_pair?
         ordered_pair_ranks =
-          [ ranking(pairs.first), ranking(pairs.last) ].sort.reverse
+          pairs.map { |pair| ranking pair }.sort.reverse
         return [2] + ordered_pair_ranks
       end
       
@@ -106,7 +106,8 @@ class Poker
     end
 
     def pairs
-      grouped_by_rank.select { |rank, cards| cards.size == 2 }.keys
+      grouped_by_rank.
+        select { |rank, cards| cards.size == 2 }.keys
     end
 
     def grouped_by_rank
