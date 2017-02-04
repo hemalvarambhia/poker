@@ -23,9 +23,9 @@ class Poker
     def rank
       return [8, ranking(ranks.first)] if straight_flush?
 
-      return [7, ranking(kind 4) ] if square?
+      return [7, ranking(kind(4).first) ] if square?
 
-      return [6, ranking(kind 3) ] if full_house?
+      return [6, ranking(kind(3).first) ] if full_house?
 
       return [5, ranks.map { |card| ranking card }.max] if flush?
       
@@ -34,15 +34,15 @@ class Poker
         return [4, rank_of_straight]
       end
       
-      return [3, ranking(kind 3) ] if three_of_a_kind?
+      return [3, ranking(kind(3).first) ] if three_of_a_kind?
       
       if two_pair?
         ordered_pair_ranks =
-          pairs.map { |pair| ranking pair }.reverse
+          kind(2).map { |pair| ranking pair }.reverse
         return [2] + ordered_pair_ranks
       end
       
-      return [1, ranking(pairs.first)] if a_pair?
+      return [1, ranking(kind(2).first)] if a_pair?
         
       [0] + ranks.map { |card| ranking card }.reverse
     end
@@ -68,11 +68,6 @@ class Poker
         map { |card| card.rank }
     end
 
-    def kind number_of
-      grouped_by_rank.
-        select { |_, cards| cards.size == number_of }.keys.first
-    end
- 
     def straight_flush?
       straight? && flush?
     end
@@ -98,17 +93,18 @@ class Poker
     end
 
     def two_pair?
-      pairs.size == 2
+      kind(2).size == 2
     end
 
     def a_pair?
-      pairs.one?
+      kind(2).one?
     end
 
-    def pairs
+    def kind number_of
       grouped_by_rank.
-        select { |_, cards| cards.size == 2 }.keys.sort
+        select { |_, cards| cards.size == number_of }.keys
     end
+
 
     def grouped_by_rank
       cards.group_by { |card| card.rank }
