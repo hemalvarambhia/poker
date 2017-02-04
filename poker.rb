@@ -38,7 +38,7 @@ class Poker
       
       if two_pair?
         ordered_pair_ranks =
-          pairs.map { |pair| ranking pair }.sort.reverse
+          pairs.map { |pair| ranking pair }.reverse
         return [2] + ordered_pair_ranks
       end
       
@@ -70,7 +70,7 @@ class Poker
 
     def kind number_of
       grouped_by_rank.
-        select { |rank, cards| cards.size == number_of }.keys.first
+        select { |_, cards| cards.size == number_of }.keys.first
     end
  
     def straight_flush?
@@ -78,7 +78,7 @@ class Poker
     end
 
     def square?
-      grouped_by_rank.one? { |rank, cards| cards.size == 4 }
+      grouped_by_rank.one? { |_, cards| cards.size == 4 }
     end
 
     def full_house?
@@ -94,7 +94,7 @@ class Poker
     end
 
     def three_of_a_kind?
-      grouped_by_rank.one? { |rank, cards| cards.size == 3 }
+      grouped_by_rank.one? { |_, cards| cards.size == 3 }
     end
 
     def two_pair?
@@ -107,7 +107,7 @@ class Poker
 
     def pairs
       grouped_by_rank.
-        select { |rank, cards| cards.size == 2 }.keys
+        select { |_, cards| cards.size == 2 }.keys.sort
     end
 
     def grouped_by_rank
